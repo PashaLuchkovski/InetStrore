@@ -19,4 +19,6 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', 'store.views.index'),
+    url(r'^products$', 'store.views.productList'),
+    url(r'^product/(?P<productID>[0-9]+)$', 'store.views.product'),
 ]

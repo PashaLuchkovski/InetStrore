@@ -4,3 +4,9 @@ from django.shortcuts import render
 
 def index(request):
     return render(request, "index.html")
+
+def productList(request):
+    return render(request, "ProductList.html")
+
+def product(request, productID):
+    return render(request, 'Product.html', {'product' : productID})
