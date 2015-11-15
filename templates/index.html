@@ -5,14 +5,20 @@
     <meta charset="UTF-8">
     <title></title>
     <link rel="stylesheet" href="{% static "index.css" %}">
+    {% block staticFiles %}
+    
+    {% endblock %}
 </head>
 <body>
-{{ Value }}
 <div id="mainContent">
-    {% block content %}
-        Some index content
-        <a href="/product/12">product</a>
-    {% endblock %}
+    <div id="menu">{% include 'GuestForm.html' %}</div>
+    <div >{% include 'UserForm.html' %}</div>
+    <div id="content">
+        {% block content %}
+            Some index content
+            <a href="/checker/alex">product</a>
+        {% endblock %}
+    </div>
 </div>
 </body>
 </html>

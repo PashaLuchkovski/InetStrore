@@ -20,5 +20,7 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', 'store.views.index'),
     url(r'^products$', 'store.views.productList'),
+    url(r'^admin$', 'store.views.admin'),
+    url(r'^checker/(?P<name>\w+)$', 'store.views.checker'),
     url(r'^product/(?P<productID>[0-9]+)$', 'store.views.product'),
 ]
