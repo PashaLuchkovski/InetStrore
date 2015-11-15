@@ -4,6 +4,11 @@ import json
 # Create your views here.
 
 def index(request):
+    try:
+        print('norm')
+        print(request.session['user_id'])
+    except:
+        print('error')
     return render(request, "index.html")
 
 def productList(request):
@@ -29,9 +34,10 @@ def auth(request):
                 print('json')
                 responseData = json.loads(response.read().decode('utf-8'))
                 user_id = responseData['user_id']
+                request.session['user_id'] = user_id
             except:
                 print('json error')
-            return render(request, "index.html", {'code': user_id})
+            return redirect('/')
         else:
             return redirect('/')
     except:
