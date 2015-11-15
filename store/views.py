@@ -43,3 +43,6 @@ def auth(request):
     except:
         print('some error')
         return redirect('/')
+
+def personalPage(request, personID):
+    return  render(request, "PersonalPage.html")
