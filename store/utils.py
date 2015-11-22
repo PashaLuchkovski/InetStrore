@@ -3,6 +3,14 @@ from store.models import User
 import json
 
 
+def get_user_authenticated(request):
+    try:
+        print(request.session['user_id'])
+        return True
+    except KeyError:
+        return False
+
+
 def vk_user_authentication(request):
     code = request.GET['code']
     response = urllib.request.urlopen("https://oauth.vk.com/access_token?client_id=5148730&"
@@ -16,9 +24,10 @@ def vk_user_authentication(request):
     UserData = responseData['response'][0]
     users = User.objects.filter(vkId=UserData['id'])
     if len(users) == 0:
-        UserData['created'] = True
-    else:
         UserData['created'] = False
+    else:
+        UserData['user_id'] = users[0].id
+        UserData['created'] = True
     return UserData
 
 
@@ -36,3 +45,4 @@ def create_user(lastName, firstName, login=None, password=None, phoneNumber=None
         user.permissions = permissions
     user.save()
     print(user)
+    return user

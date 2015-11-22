@@ -1,16 +1,13 @@
 from django.shortcuts import render, redirect
 from store.models import ADMIN, USER, CHECKER
-from store.utils import vk_user_authentication, create_user
+from store.utils import vk_user_authentication, create_user, get_user_authenticated
 
 # Create your views here.
 
+
 def index(request):
-    try:
-        print('norm')
-        print(request.session['user_id'])
-    except:
-        print('error')
-    return render(request, "index.html")
+    authenticated = get_user_authenticated(request)
+    return render(request, "index.html", {'authenticated': authenticated})
 
 
 def productList(request):
@@ -33,13 +30,31 @@ def checker(request, name):
 def auth(request):
     try:
         if request.method == 'GET':
+            try:
+                request.GET['exit']
+                del request.session['user_id']
+            except KeyError:
+                pass
             UserData = vk_user_authentication(request)
             print(UserData)
-            if UserData['created']:
-                create_user(firstName=UserData['first_name'], lastName=UserData['last_name'], vkId=UserData['id'])
+            if not UserData['created']:
+                user_id = create_user(firstName=UserData['first_name'], lastName=UserData['last_name'],
+                                     vkId=UserData['id']).id
+            else:
+                user_id = UserData['user_id']
+            request.session['user_id'] = user_id
             return redirect('/')
-        else:
-            return redirect('/')
+        if request.method == 'POST':
+            lastName = request.POST['lastName']
+            firstName = request.POST['firstName']
+            login = request.POST['login']
+            password = request.POST['password']
+            phoneNumber = request.POST['phoneNumber']
+            print('here')
+            request.session['user_id'] = create_user(firstName=firstName, lastName=lastName,
+                                            login=login,password=password,phoneNumber=phoneNumber).id
+            print('here1')
+        return redirect('/')
     except:
         return redirect('/')
 

@@ -10,14 +10,19 @@
     {% endblock %}
 </head>
 <body>
-<div id="mainContent">
-    <div id="menu">{% include 'GuestForm.html' %}</div>
-    <div >{% include 'Register.html' %}</div>
+<div id="main-content">
+    <div id="menu">
+        {% if authenticated %}
+            <a href="http://127.0.0.1:8000/auth?exit=1">exit</a>
+        {% else %}
+            {% include 'Register.html' %}
+        {% endif %}
+    </div>
     <div id="content">
         {% block content %}
             Some index content
 {#            5148730 id моего vk приложения #}
-            <a href="https://oauth.vk.com/authorize?client_id=5148730&display=page&redirect_uri=http://127.0.0.1:8000/auth">register</a><br>
+
         {% endblock %}
     </div>
 </div>
