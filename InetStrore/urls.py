@@ -24,5 +24,5 @@ urlpatterns = [
     url(r'^auth$', 'store.views.auth'),
     url(r'^checker/(?P<name>\w+)$', 'store.views.checker'),
     url(r'^product/(?P<productID>[0-9]+)$', 'store.views.product'),
-    url(r'^personalpage/(?P<userID>[0-9]+)$', 'store.views.product'),
+    url(r'^personalpage/(?P<userID>[0-9]+)$', 'store.views.personalPage'),
 ]

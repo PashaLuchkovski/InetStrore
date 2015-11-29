@@ -59,5 +59,5 @@ def auth(request):
         return redirect('/')
 
 
-def personalPage(request, personID):
+def personalPage(request, userID):
     return render(request, "PersonalPage.html")

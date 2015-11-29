@@ -12,11 +12,15 @@
 <body>
 <div id="main-content">
     <div id="menu">
+        <div>
+            some denjfkaef
+        </div>
         {% if authenticated %}
-            <a href="http://127.0.0.1:8000/auth?exit=1">exit</a>
+            <a href="http://127.0.0.1:8000/auth?exit=1" class="button">exit</a>
         {% else %}
             {% include 'Register.html' %}
         {% endif %}
+        <a href="/personalpage/10">personal</a>
     </div>
     <div id="content">
         {% block content %}

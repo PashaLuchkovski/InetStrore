@@ -1,4 +1,10 @@
 {% extends 'index.html' %}
+{% load staticfiles %}
+
+{% block staticFiles %}
+<link rel="stylesheet" href="{% static "pesonalPage.css" %}">
+{% endblock %}
 
 {% block content %}
+    personal page content
 {% endblock %}
